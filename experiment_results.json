@@ -1,0 +1,293 @@
+{
+  "dataset": {
+    "file": "german.csv",
+    "rows": 1000,
+    "features": 20,
+    "target_column": "Creditability",
+    "positive_class": 1,
+    "class_counts": {
+      "0": 300,
+      "1": 700
+    },
+    "missing_cells": 0
+  },
+  "split": {
+    "method": "train_test_split",
+    "test_size": 0.2,
+    "random_state": 123,
+    "stratified": true,
+    "train_rows": 800,
+    "test_rows": 200
+  },
+  "cross_validation": {
+    "method": "StratifiedKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 123,
+    "selection_metric": "mean ROC-AUC",
+    "test_target_used_for_selection": false
+  },
+  "experiments": [
+    {
+      "model_name": "Soft Voting: Random Forest + Extra Trees (weights 1:1)",
+      "parameters": {
+        "voting": "soft",
+        "weights": [
+          1,
+          1
+        ],
+        "random_forest": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "min_samples_leaf": 4,
+          "class_weight": "balanced_subsample"
+        },
+        "extra_trees": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "min_samples_leaf": 2,
+          "class_weight": "balanced"
+        }
+      },
+      "cv_roc_auc_mean": 0.7929315476190476,
+      "cv_roc_auc_std": 0.01925394840808775,
+      "cv_accuracy_mean": 0.765,
+      "cv_precision_mean": 0.8278243469690212,
+      "cv_recall_mean": 0.8392857142857142,
+      "cv_f1_mean": 0.833319055854672
+    },
+    {
+      "model_name": "Soft Voting: Random Forest + Extra Trees (weights 1:2)",
+      "parameters": {
+        "voting": "soft",
+        "weights": [
+          1,
+          2
+        ],
+        "random_forest": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "min_samples_leaf": 4,
+          "class_weight": "balanced_subsample"
+        },
+        "extra_trees": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "min_samples_leaf": 2,
+          "class_weight": "balanced"
+        }
+      },
+      "cv_roc_auc_mean": 0.7927827380952381,
+      "cv_roc_auc_std": 0.019693381765455528,
+      "cv_accuracy_mean": 0.7612500000000001,
+      "cv_precision_mean": 0.8260203807991419,
+      "cv_recall_mean": 0.8357142857142856,
+      "cv_f1_mean": 0.8306309788580158
+    },
+    {
+      "model_name": "Soft Voting: Random Forest + Extra Trees (weights 2:1)",
+      "parameters": {
+        "voting": "soft",
+        "weights": [
+          2,
+          1
+        ],
+        "random_forest": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "min_samples_leaf": 4,
+          "class_weight": "balanced_subsample"
+        },
+        "extra_trees": {
+          "n_estimators": 300,
+          "max_features": "sqrt",
+          "min_samples_leaf": 2,
+          "class_weight": "balanced"
+        }
+      },
+      "cv_roc_auc_mean": 0.792671130952381,
+      "cv_roc_auc_std": 0.018608852588596535,
+      "cv_accuracy_mean": 0.7675,
+      "cv_precision_mean": 0.8280807512543339,
+      "cv_recall_mean": 0.8428571428571429,
+      "cv_f1_mean": 0.8351620377866107
+    },
+    {
+      "model_name": "Random Forest: 300 деревьев, leaf=2",
+      "parameters": {
+        "n_estimators": 300,
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "class_weight": "balanced_subsample"
+      },
+      "cv_roc_auc_mean": 0.7916294642857143,
+      "cv_roc_auc_std": 0.015474759549232936,
+      "cv_accuracy_mean": 0.7575000000000001,
+      "cv_precision_mean": 0.793515981658959,
+      "cv_recall_mean": 0.8839285714285715,
+      "cv_f1_mean": 0.8360820594894293
+    },
+    {
+      "model_name": "Extra Trees: sqrt, leaf=2",
+      "parameters": {
+        "n_estimators": 500,
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "class_weight": "balanced"
+      },
+      "cv_roc_auc_mean": 0.7895461309523809,
+      "cv_roc_auc_std": 0.02295468302369376,
+      "cv_accuracy_mean": 0.7525,
+      "cv_precision_mean": 0.8192192103184185,
+      "cv_recall_mean": 0.8303571428571429,
+      "cv_f1_mean": 0.8245621675569333
+    },
+    {
+      "model_name": "Random Forest: 500 деревьев, leaf=4",
+      "parameters": {
+        "n_estimators": 500,
+        "max_features": "sqrt",
+        "min_samples_leaf": 4,
+        "class_weight": "balanced_subsample"
+      },
+      "cv_roc_auc_mean": 0.7884672619047619,
+      "cv_roc_auc_std": 0.016884471810571827,
+      "cv_accuracy_mean": 0.74375,
+      "cv_precision_mean": 0.8187213529318793,
+      "cv_recall_mean": 0.8142857142857143,
+      "cv_f1_mean": 0.8161858614967155
+    },
+    {
+      "model_name": "HistGradientBoosting: 150 итераций, lr=0.05, 15 листьев",
+      "parameters": {
+        "max_iter": 150,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 1.0
+      },
+      "cv_roc_auc_mean": 0.7789434523809524,
+      "cv_roc_auc_std": 0.021328874809795454,
+      "cv_accuracy_mean": 0.7637499999999999,
+      "cv_precision_mean": 0.792756034165024,
+      "cv_recall_mean": 0.8964285714285716,
+      "cv_f1_mean": 0.8412259936154344
+    },
+    {
+      "model_name": "Gradient Boosting: 150 итераций, lr=0.05, depth=2",
+      "parameters": {
+        "n_estimators": 150,
+        "learning_rate": 0.05,
+        "max_depth": 2,
+        "min_samples_leaf": 5
+      },
+      "cv_roc_auc_mean": 0.7779389880952381,
+      "cv_roc_auc_std": 0.02115615375559653,
+      "cv_accuracy_mean": 0.76,
+      "cv_precision_mean": 0.7789840345317477,
+      "cv_recall_mean": 0.9178571428571429,
+      "cv_f1_mean": 0.8425226513340199
+    },
+    {
+      "model_name": "Gradient Boosting: 200 итераций, lr=0.03, depth=2",
+      "parameters": {
+        "n_estimators": 200,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "min_samples_leaf": 5
+      },
+      "cv_roc_auc_mean": 0.7750744047619047,
+      "cv_roc_auc_std": 0.019410732196695916,
+      "cv_accuracy_mean": 0.7637499999999999,
+      "cv_precision_mean": 0.7790130074522972,
+      "cv_recall_mean": 0.925,
+      "cv_f1_mean": 0.8455772621349595
+    },
+    {
+      "model_name": "Extra Trees: max_features=0.7, leaf=2",
+      "parameters": {
+        "n_estimators": 500,
+        "max_features": 0.7,
+        "min_samples_leaf": 2
+      },
+      "cv_roc_auc_mean": 0.7744791666666668,
+      "cv_roc_auc_std": 0.015226003299651866,
+      "cv_accuracy_mean": 0.7625,
+      "cv_precision_mean": 0.8003120472241212,
+      "cv_recall_mean": 0.8803571428571428,
+      "cv_f1_mean": 0.8384097407033769
+    },
+    {
+      "model_name": "Extra Trees: max_features=0.7, leaf=4",
+      "parameters": {
+        "n_estimators": 500,
+        "max_features": 0.7,
+        "min_samples_leaf": 4
+      },
+      "cv_roc_auc_mean": 0.7736607142857144,
+      "cv_roc_auc_std": 0.014450814628878452,
+      "cv_accuracy_mean": 0.76625,
+      "cv_precision_mean": 0.7974021077283373,
+      "cv_recall_mean": 0.8928571428571429,
+      "cv_f1_mean": 0.8423825434100938
+    },
+    {
+      "model_name": "Gradient Boosting: 150 итераций, lr=0.05, depth=1",
+      "parameters": {
+        "n_estimators": 150,
+        "learning_rate": 0.05,
+        "max_depth": 1,
+        "min_samples_leaf": 5
+      },
+      "cv_roc_auc_mean": 0.7608258928571429,
+      "cv_roc_auc_std": 0.017704249197648167,
+      "cv_accuracy_mean": 0.7462500000000001,
+      "cv_precision_mean": 0.7548542871498068,
+      "cv_recall_mean": 0.9446428571428571,
+      "cv_f1_mean": 0.8390443795508883
+    }
+  ],
+  "selected_model": {
+    "model_name": "Soft Voting: Random Forest + Extra Trees (weights 1:1)",
+    "selection_reason": "Максимальный средний ROC-AUC на 5-fold CV по train.",
+    "parameters": {
+      "voting": "soft",
+      "weights": [
+        1,
+        1
+      ],
+      "random_forest": {
+        "n_estimators": 300,
+        "max_features": "sqrt",
+        "min_samples_leaf": 4,
+        "class_weight": "balanced_subsample"
+      },
+      "extra_trees": {
+        "n_estimators": 300,
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "class_weight": "balanced"
+      }
+    }
+  },
+  "final_test_metrics": {
+    "roc_auc": 0.809047619047619,
+    "accuracy": 0.76,
+    "precision": 0.8382352941176471,
+    "recall": 0.8142857142857143,
+    "f1": 0.8260869565217391
+  },
+  "final_test_confusion_matrix": [
+    [
+      38,
+      22
+    ],
+    [
+      26,
+      114
+    ]
+  ],
+  "final_test_prediction_counts": {
+    "0": 64,
+    "1": 136
+  }
+}
